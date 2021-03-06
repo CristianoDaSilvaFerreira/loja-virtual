@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../tabs/home_tab.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -12,15 +13,7 @@ class HomeScreen extends StatelessWidget {
       // Impedido que seja arratasdo para troca de tela
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        Container(
-          color: Colors.yellow,
-        ),
-        Container(
-          color: Colors.red,
-        ),
-        Container(
-          color: Colors.green,
-        ),
+        HomeTab(),
       ],
     );
   }
