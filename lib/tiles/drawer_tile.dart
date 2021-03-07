@@ -12,6 +12,7 @@ class DrawerTile extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
+        onTap: () {},
         child: Container(
           height: 60,
           child: Row(
