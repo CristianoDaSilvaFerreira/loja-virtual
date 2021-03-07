@@ -3,7 +3,6 @@ import '../widgets/custom_drawer.dart';
 import '../tabs/home_tab.dart';
 
 class HomeScreen extends StatelessWidget {
-
   // Controladores da página
   final _pageController = PageController();
   @override
@@ -16,8 +15,12 @@ class HomeScreen extends StatelessWidget {
       children: <Widget>[
         Scaffold(
           body: HomeTab(),
-          drawer: CustomDrawer(),
-        )
+          drawer: CustomDrawer(_pageController),
+        ),
+        Container(color: Colors.red),
+        Container(color: Colors.blue),
+        Container(color: Colors.green),
+        Container(color: Colors.grey),
       ],
     );
   }
