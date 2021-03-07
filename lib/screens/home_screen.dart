@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
         ),
         Scaffold(
           appBar: AppBar(
-            title: Text("Produtos"),
+            title: Text("Categorias "),
             centerTitle: true,
           ),
           drawer: CustomDrawer(_pageController),
