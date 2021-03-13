@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../datas/products_data.dart';
+import '../datas/product_data.dart';
 import '../tiles/product_tile.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -47,15 +47,16 @@ class CategoryScreen extends StatelessWidget {
                     GridView.builder(
                       padding: EdgeInsets.all(4),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 4,
-                          crossAxisSpacing: 4,
-                          childAspectRatio: 0.65),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 4,
+                        childAspectRatio: 0.65,
+                      ),
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
                         return ProductTile(
                           "grid",
-                          ProductsData.fromDocuments(
+                          ProductData.fromDocuments(
                             snapshot.data.documents[index],
                           ),
                         );
@@ -67,13 +68,13 @@ class CategoryScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ProductTile(
                           "list",
-                          ProductsData.fromDocuments(
+                          ProductData.fromDocuments(
                             snapshot.data.documents[index],
                           ),
                         );
                       },
                     ),
-                    Container(width: 0, height: 0,)
+                   
                   ],
                 );
               }
