@@ -41,7 +41,7 @@ class CategoryScreen extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else {
-                TabBarView(
+                return TabBarView(
                   physics: NeverScrollableScrollPhysics(),
                   children: <Widget>[
                     GridView.builder(
