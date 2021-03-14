@@ -4,6 +4,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 
 class ProductScreen extends StatefulWidget {
   final ProductData product;
+
   ProductScreen(this.product);
 
   @override
@@ -12,7 +13,11 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   final ProductData product;
+
+  String size;
+
   _ProductScreenState(this.product);
+
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).primaryColor;
@@ -58,7 +63,52 @@ class _ProductScreenState extends State<ProductScreen> {
                     fontWeight: FontWeight.bold,
                     color: primaryColor,
                   ),
-                )
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Tamanho',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(
+                  height: 34,
+                  child: GridView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 0.5,
+                    ),
+                    children: product.sizes.map((s) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            size = s;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4),
+                            ),
+                            border: Border.all(
+                              color:
+                                  s == size ? primaryColor : Colors.grey[500],
+                              width: 2.5,
+                            ),
+                          ),
+                          width: 50,
+                          alignment: Alignment.center,
+                          child: Text(s),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ],
             ),
           )
