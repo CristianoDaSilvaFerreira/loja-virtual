@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loja_virtual/helpers.dart/validators.dart';
+import 'package:loja_virtual/models/user.dart';
+import 'package:loja_virtual/models/user_manager.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -124,7 +127,20 @@ class _LoginScreenState extends State<LoginScreen> {
               child: OutlinedButton.icon(
                 icon: FaIcon(FontAwesomeIcons.shopify),
                 onPressed: () {
-                  _formKey.currentState.validate();
+                  if (_formKey.currentState.validate()) {
+                    context.read()<UserManager>().signIn(
+                      user: User(
+                        email: _emailController.text,
+                        password: _passController.text,
+                      ),
+                      onFail: (e) {
+
+                      },
+                      onSuccess: (){
+                        // TODO: FECHAR TELA DE LOGIN
+                      }
+                    );
+                  }
                 },
                 label: Text(
                   "Entrar",
