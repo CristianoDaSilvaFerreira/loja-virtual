@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loja_virtual/helpers.dart/validators.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -64,7 +65,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               keyboardType: TextInputType.emailAddress,
+              controller: _emailController,
               validator: (email) {
+                if (!emailValid(email)) {
+                  return 'E-mail inválido';
+                }
                 return null;
               },
             ),
@@ -102,6 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               keyboardType: TextInputType.text,
               obscureText: _toggleVisibility,
+              controller: _passController,
               validator: (pass) {
                 if (pass.isEmpty || pass.length < 6) {
                   return "Senha inválida";
@@ -117,7 +123,9 @@ class _LoginScreenState extends State<LoginScreen> {
               height: MediaQuery.of(context).size.height / 18,
               child: OutlinedButton.icon(
                 icon: FaIcon(FontAwesomeIcons.shopify),
-                onPressed: () {},
+                onPressed: () {
+                  _formKey.currentState.validate();
+                },
                 label: Text(
                   "Entrar",
                   style: TextStyle(
