@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'screens/home_screen.dart';
+import 'package:loja_virtual/screens/login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,11 +13,9 @@ class MyApp extends StatelessWidget {
       title: "Flutter's Clothing",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Color.fromARGB(255, 4, 125, 141)
-      ),
-     home: HomeScreen(),
+          primarySwatch: Colors.blue,
+          primaryColor: Color.fromARGB(255, 4, 125, 141)),
+      home: LoginScreen(),
     );
   }
 }
-
