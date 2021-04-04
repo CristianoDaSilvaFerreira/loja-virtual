@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loja_virtual/buttons/facebook_buttom.dart';
+import 'package:loja_virtual/buttons/forget_buttom.dart';
+import 'package:loja_virtual/buttons/google_buttom.dart';
+import 'package:loja_virtual/buttons/login_buttom.dart';
+import 'package:loja_virtual/buttons/register_buttm.dart';
 import 'package:loja_virtual/forms/email_form.dart';
 import 'package:loja_virtual/forms/pass_form.dart';
 import 'package:loja_virtual/helpers.dart/validators.dart';
@@ -13,16 +18,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // Controladores do texto
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passController = TextEditingController();
-
   // key de validação
   final _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // visibilidade do "olhinho"
-  bool _toggleVisibility = true;
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).primaryColor;
@@ -65,174 +64,28 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 16),
 
                 // ========== Botão Entrar ========== //
-                Container(
-                  height: MediaQuery.of(context).size.height / 18,
-                  child: OutlinedButton.icon(
-                    icon: FaIcon(FontAwesomeIcons.shopify),
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        context.read<UserManager>().signIn(
-                            user: User(
-                              email: _emailController.text,
-                              password: _passController.text,
-                            ),
-                            onFail: (e) {
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   SnackBar(
-                              //     content: Text('Falhar ao entrar: $e'),
-                              //     backgroundColor: Colors.red,
-                              //   ),
-                              // );
-                              showDialog(
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('Error ao entrar :\n$e'),
-                                    actions: [
-                                      OutlinedButton(
-                                        style: TextButton.styleFrom(
-                                          backgroundColor: primaryColor,
-                                          primary: Colors.white,
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text('Fechar'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            onSuccess: () {
-                              // TODO: FECHAR TELA DE LOGIN
-                            });
-                      }
-                    },
-                    label: Text(
-                      "Entrar",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: TextButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: primaryColor,
-                      primary: Colors.white,
-                      shape: StadiumBorder(),
-                    ),
-                  ),
-                ),
+                LoginButtom(),
+
                 Divider(
                   height: 25,
                   color: primaryColor,
                 ),
 
                 // ========== Botão Facebook ========== //
-                Container(
-                  height: MediaQuery.of(context).size.height / 18,
-                  child: OutlinedButton.icon(
-                    icon: FaIcon(
-                      FontAwesomeIcons.facebook,
-                      color: Colors.blue,
-                    ),
-                    onPressed: () {},
-                    label: Text(
-                      "Facebook",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: TextButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: Colors.white,
-                      primary: Colors.black,
-                      shape: StadiumBorder(),
-                    ),
-                  ),
-                ),
+                FacebookButton(),
+
                 SizedBox(height: 25),
 
                 // ========== Botão Google ========== //
-                Container(
-                  height: MediaQuery.of(context).size.height / 18,
-                  child: OutlinedButton.icon(
-                    icon: FaIcon(
-                      FontAwesomeIcons.google,
-                      color: Colors.red,
-                    ),
-                    onPressed: () {},
-                    label: Text(
-                      "Google",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: TextButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: Colors.white,
-                      primary: Colors.black,
-                      shape: StadiumBorder(),
-                    ),
-                  ),
-                ),
+                GoogleButtom(),
                 SizedBox(height: 20),
 
                 // ========== Field e campo Inscrever-se ========== //
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Não tem uma conta?',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                        ),
-                        child: Text(
-                          'Inscrever-se agora',
-                          style: TextStyle(
-                            color: primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
+
+                ForgetButtom(),
 
                 // ========== Field esqueceu a senha ========== //
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                    ),
-                    child: Text(
-                      'Esqueceu a senha?',
-                      style: TextStyle(
-                        color: primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
+                RegisterButtom(),
               ],
             ),
           ),
