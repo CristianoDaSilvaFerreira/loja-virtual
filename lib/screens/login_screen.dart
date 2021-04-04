@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loja_virtual/forms/email_form.dart';
+import 'package:loja_virtual/forms/pass_form.dart';
 import 'package:loja_virtual/helpers.dart/validators.dart';
 import 'package:loja_virtual/models/user.dart';
 import 'package:loja_virtual/models/user_manager.dart';
@@ -53,78 +55,12 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.all(16),
               children: <Widget>[
                 // ========== Field Email ========== //
-                TextFormField(
-                  decoration: InputDecoration(
-                    // icon: Icon(Icons.email_outlined),
-                    prefixIcon: Icon(Icons.email_outlined),
-                    labelText: 'E-mail',
-                    hintText: 'Entrer com seu o e-email',
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      gapPadding: 3,
-                      borderSide: BorderSide(
-                        color: primaryColor,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      borderSide: BorderSide(
-                        color: primaryColor,
-                      ),
-                    ),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  controller: _emailController,
-                  validator: (email) {
-                    if (!emailValid(email)) {
-                      return 'E-mail inválido';
-                    }
-                    return null;
-                  },
-                ),
+                EmailForm(),
 
                 SizedBox(height: 20),
 
                 // ========== Field Senha ========== //
-                TextFormField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.visibility_off),
-                      onPressed: () {
-                        setState(() {
-                          _toggleVisibility = !_toggleVisibility;
-                        });
-                      },
-                    ),
-                    labelText: 'Senha',
-                    hintText: 'Informe sua senha',
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      gapPadding: 3,
-                      borderSide: BorderSide(
-                        color: primaryColor,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      borderSide: BorderSide(
-                        color: primaryColor,
-                      ),
-                    ),
-                  ),
-                  keyboardType: TextInputType.text,
-                  obscureText: _toggleVisibility,
-                  controller: _passController,
-                  validator: (pass) {
-                    if (pass.isEmpty || pass.length < 6) {
-                      return "Senha inválida";
-                    }
-                    return null;
-                  },
-                ),
+                PassForm(),
 
                 SizedBox(height: 16),
 
@@ -255,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
                       ),
                     ),
                     SizedBox(width: 10),
