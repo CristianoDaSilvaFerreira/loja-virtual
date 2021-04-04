@@ -24,65 +24,70 @@ class _LoginButtomState extends State<LoginButtom> {
     final Color primaryColor = Theme.of(context).primaryColor;
     return Form(
       key: _formKey,
-      child: Container(
-        height: MediaQuery.of(context).size.height / 18,
-        child: OutlinedButton.icon(
-          icon: FaIcon(FontAwesomeIcons.shopify),
-          onPressed: () {
-            if (_formKey.currentState.validate()) {
-              context.read<UserManager>().signIn(
-                  user: User(
-                    email: _emailController.text,
-                    password: _passController.text,
-                  ),
-                  onFail: (e) {
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   SnackBar(
-                    //     content: Text('Falhar ao entrar: $e'),
-                    //     backgroundColor: Colors.red,
-                    //   ),
-                    // );
-                    showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Error ao entrar :\n$e'),
-                          actions: [
-                            OutlinedButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: primaryColor,
-                                primary: Colors.white,
+      child: Consumer<UserManager>(
+        builder: (_, userManager, __) {
+          return Container(
+            height: MediaQuery.of(context).size.height / 18,
+            child: OutlinedButton.icon(
+              icon: FaIcon(FontAwesomeIcons.shopify),
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  userManager.signIn(
+                    user: User(
+                      email: _emailController.text,
+                      password: _passController.text,
+                    ),
+                    onFail: (e) {
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   SnackBar(
+                      //     content: Text('Falhar ao entrar: $e'),
+                      //     backgroundColor: Colors.red,
+                      //   ),
+                      // );
+                      showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Error ao entrar :\n$e'),
+                            actions: [
+                              OutlinedButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: primaryColor,
+                                  primary: Colors.white,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Fechar'),
                               ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('Fechar'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  onSuccess: () {
-                    // TODO: FECHAR TELA DE LOGIN
-                  });
-            }
-          },
-          label: Text(
-            "Entrar",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    onSuccess: () {
+                      // TODO: FECHAR TELA DE LOGIN
+                    },
+                  );
+                }
+              },
+              label: Text(
+                "Entrar",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: TextButton.styleFrom(
+                elevation: 0,
+                backgroundColor: primaryColor,
+                primary: Colors.white,
+                shape: StadiumBorder(),
+              ),
             ),
-          ),
-          style: TextButton.styleFrom(
-            elevation: 0,
-            backgroundColor: primaryColor,
-            primary: Colors.white,
-            shape: StadiumBorder(),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
