@@ -3,6 +3,8 @@ import 'package:loja_virtual/models/user_manager.dart';
 import 'package:loja_virtual/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'screens/home_screen.dart';
+
 void main() {
   runApp(MyApp());
 }
